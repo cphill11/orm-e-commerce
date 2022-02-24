@@ -1,4 +1,3 @@
-// caps used here, but not in title of file ***
 const { Model, DataTypes } = require('sequelize');
 
 const sequelize = require('../config/connection.js');
