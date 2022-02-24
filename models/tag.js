@@ -4,7 +4,6 @@ const sequelize = require('../config/connection.js');
 
 class Tag extends Model {}
 
-// caps used here, but not in title of file ***
 Tag.init(
   {
     // define columns

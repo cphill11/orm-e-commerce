@@ -7,7 +7,6 @@ const sequelize = require('../config/connection');
 class Product extends Model {}
 
 
-// caps used here, but not in title of file ***
 // set up fields and rules for Product model
 Product.init(
   {

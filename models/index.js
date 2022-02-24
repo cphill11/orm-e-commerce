@@ -13,7 +13,7 @@ const ProductTag = require('./ProductTag');
 // Tags belongToMany Products (through ProductTag)
 
 
-// caps used here, but not in title of file ***
+
 module.exports = {
   Product,
   Category,
