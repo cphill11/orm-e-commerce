@@ -4,10 +4,13 @@ const { Category, Product, ProductTag, Tag } = require("../../models");
 
 // The `/api/categories` endpoint
 
-// find all categories
-// be sure to include its associated Products (??? how???)
+// find all categories, includes associated Products
 router.get("/", (req, res) => {
-  Category.findAll()
+  Category.findAll({
+    include: [
+      Product
+    ]
+  })
     .then((dbCategoryData) => res.json(dbCategoryData))
     .catch((err) => {
       console.log(err);
@@ -22,29 +25,10 @@ router.get("/:id", (req, res) => {
     where: {
       id: req.params.id,
     },
-    attributes: [
-      "id",
-      "category_name"[
-        (sequelize.literal(
-          "(SELECT COUNT(*) FROM category WHERE id = category_id)"
-        ),
-        "category_count")
-      ],
-    ],
+    
     include: [
-      {
-        model: Product,
-        attributes: ["id", "product_name"],
-        include: {
-          model: Tag,
-          attributes: ["id"],
-        },
-      },
-      {
-        model: ProductTag,
-        attributes: ["id"],
-      },
-    ],
+        Product
+    ]
   })
     .then((dbCategoryData) => {
       if (!dbCategoryData) {
@@ -61,10 +45,10 @@ router.get("/:id", (req, res) => {
 
 // create a new category
 router.post("/", (req, res) => {
-  Category.create({
-    comment_text: req.body.comment_text,
-    id: req.body.id,
-  })
+  Category.create(
+    // requests whole shebang.
+    req.body,
+  )
     .then((dbCategoryData) => res.json(dbCategoryData))
     .catch((err) => {
       console.log(err);
@@ -76,7 +60,6 @@ router.post("/", (req, res) => {
 router.put("/:id", (req, res) => {
   // pass in req.body instead to only update what's passed through
   Category.update(req.body, {
-    individualHooks: true,
     where: {
       id: req.params.id,
     },

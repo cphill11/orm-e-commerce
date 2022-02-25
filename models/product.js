@@ -1,4 +1,3 @@
-// file ok (??)
 // import important parts of sequelize library
 const { Model, DataTypes } = require('sequelize');
 // import our database connection from config.js
@@ -28,16 +27,14 @@ Product.init(
         isDecimal: true
       }
     },
-    // is this ok??
     stock: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      default: 10,
+      defaultValue: 10,
       validate: {
-        isInteger: true
+        isNumeric: true
       }
     },
-    // is ok (???)
     category_id: {
       type: DataTypes.INTEGER,
       references: {

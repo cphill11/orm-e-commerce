@@ -1,4 +1,3 @@
-// file ok (??)
 // import important parts of sequelize library
 const { Model, DataTypes } = require("sequelize");
 // import our database connection from config.js
@@ -18,6 +17,13 @@ ProductTag.init(
     product_id: {
       type: DataTypes.INTEGER,
       references: {
+        model: "product",
+        key: "id",
+      },
+    },
+    tag_id: {
+      type: DataTypes.INTEGER,
+      references: {
         model: "tag",
         key: "id",
       },
@@ -25,9 +31,10 @@ ProductTag.init(
   },
   {
     sequelize,
+    timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: "comment",
+    modelName: "product_tag",
   }
 );
 module.exports = ProductTag;
