@@ -4,10 +4,8 @@ const { Product, Category, Tag, ProductTag } = require("../../models");
 
 // The `/api/products` endpoint
 
-// get all products
+// GET all products, including associated Category and Tag data
 router.get("/", (req, res) => {
-  // find all products
-  // be sure to include its associated Category and Tag data
   Product.findAll({
     include: [
       Category,
@@ -24,9 +22,7 @@ router.get("/", (req, res) => {
     });
 });
 
-// get one product
-// find a single product by its `id`
-// be sure to include its associated Category and Tag data
+// GET one product by it's `id`, inclduing associated Category and Tag data
 router.get("/:id", (req, res) => {
   Product.findOne({
     where: {
@@ -53,7 +49,7 @@ router.get("/:id", (req, res) => {
     });
 });
 
-// create new product data (use to test in Insomnia lines 58-64)
+// create new product data (lines 54-61 used to test in Insomnia)
 router.post("/", (req, res) => {
   /* req.body should look like this...
     {
@@ -85,7 +81,7 @@ router.post("/", (req, res) => {
     });
 });
 
-// update product data (code provided from original sourcecode)
+// update product data
 router.put("/:id", (req, res) => {
   Product.update(req.body, {
     where: {
