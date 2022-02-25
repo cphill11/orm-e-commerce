@@ -1,11 +1,11 @@
-    // is this right (??)
+// is file ok (??)
 const router = require("express").Router();
-const { Category, Product, ProductTag } = require("../../models");
+const { Category, Product, ProductTag, Tag } = require("../../models");
 
 // The `/api/categories` endpoint
 
-  // find all categories
-  // be sure to include its associated Products
+// find all categories
+// be sure to include its associated Products (??? how???)
 router.get("/", (req, res) => {
   Category.findAll()
     .then((dbCategoryData) => res.json(dbCategoryData))
@@ -15,10 +15,10 @@ router.get("/", (req, res) => {
     });
 });
 
-  // find one category by its `id` value
-  // be sure to include its associated Products
+// find one category by its `id` value
+// be sure to include its associated Products
 router.get("/:id", (req, res) => {
-  Post.findOne({
+  Category.findOne({
     where: {
       id: req.params.id,
     },
@@ -33,10 +33,10 @@ router.get("/:id", (req, res) => {
     ],
     include: [
       {
-        model: Category,
-        attributes: ["id", "category_name"],
+        model: Product,
+        attributes: ["id", "product_name"],
         include: {
-          model: Product,
+          model: Tag,
           attributes: ["id"],
         },
       },
@@ -59,7 +59,7 @@ router.get("/:id", (req, res) => {
     });
 });
 
-  // create a new category
+// create a new category
 router.post("/", (req, res) => {
   Category.create({
     comment_text: req.body.comment_text,
@@ -72,7 +72,7 @@ router.post("/", (req, res) => {
     });
 });
 
-  // update a category by its `id` value
+// update a category by its `id` value
 router.put("/:id", (req, res) => {
   // pass in req.body instead to only update what's passed through
   Category.update(req.body, {
@@ -94,7 +94,7 @@ router.put("/:id", (req, res) => {
     });
 });
 
-  // delete a category by its `id` value
+// delete a category by its `id` value
 router.delete("/:id", (req, res) => {
   Category.destroy({
     where: {
