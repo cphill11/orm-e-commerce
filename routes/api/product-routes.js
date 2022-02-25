@@ -11,10 +11,10 @@ router.get("/", (req, res) => {
       Category,
       {
         model: Tag,
-        through: ProductTag
-      }
-    ]
-  })    
+        through: ProductTag,
+      },
+    ],
+  })
     .then((dbProductData) => res.json(dbProductData))
     .catch((err) => {
       console.log(err);
@@ -32,7 +32,7 @@ router.get("/:id", (req, res) => {
       Category,
       {
         model: Tag,
-        through: ProductTag
+        through: ProductTag,
       },
     ],
   })

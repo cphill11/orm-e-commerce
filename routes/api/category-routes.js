@@ -3,12 +3,10 @@ const { Category, Product, ProductTag, Tag } = require("../../models");
 
 // The `/api/categories` endpoint
 
-// find all categories, includes associated Products
+// find all categories, including associated Products
 router.get("/", (req, res) => {
   Category.findAll({
-    include: [
-      Product
-    ]
+    include: [Product],
   })
     .then((dbCategoryData) => res.json(dbCategoryData))
     .catch((err) => {
@@ -17,17 +15,13 @@ router.get("/", (req, res) => {
     });
 });
 
-// find one category by its `id` value
-// be sure to include its associated Products
+// find one category by its `id` value, including associated Products
 router.get("/:id", (req, res) => {
   Category.findOne({
     where: {
       id: req.params.id,
     },
-    
-    include: [
-        Product
-    ]
+    include: [Product],
   })
     .then((dbCategoryData) => {
       if (!dbCategoryData) {
@@ -46,7 +40,7 @@ router.get("/:id", (req, res) => {
 router.post("/", (req, res) => {
   Category.create(
     // requests whole shebang.
-    req.body,
+    req.body
   )
     .then((dbCategoryData) => res.json(dbCategoryData))
     .catch((err) => {
