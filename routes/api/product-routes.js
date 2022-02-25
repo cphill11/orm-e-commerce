@@ -1,4 +1,3 @@
-// use this file as template for other routes!!!!
 const router = require("express").Router();
 const { Product, Category, Tag, ProductTag } = require("../../models");
 
@@ -49,7 +48,7 @@ router.get("/:id", (req, res) => {
     });
 });
 
-// create new product data (lines 54-61 used to test in Insomnia)
+// create new product data (lines 53-60 used to test in Insomnia)
 router.post("/", (req, res) => {
   /* req.body should look like this...
     {
