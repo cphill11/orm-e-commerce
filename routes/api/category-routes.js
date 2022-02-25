@@ -1,4 +1,3 @@
-// file needs help
 const router = require("express").Router();
 const { Category, Product, ProductTag, Tag } = require("../../models");
 

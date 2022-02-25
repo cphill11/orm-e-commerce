@@ -1,4 +1,4 @@
-// file needs help
+// use this file as template for other routes!!!!
 const router = require("express").Router();
 const { Product, Category, Tag, ProductTag } = require("../../models");
 
@@ -8,7 +8,15 @@ const { Product, Category, Tag, ProductTag } = require("../../models");
 router.get("/", (req, res) => {
   // find all products
   // be sure to include its associated Category and Tag data
-  Product.findAll()
+  Product.findAll({
+    include: [
+      Category,
+      {
+        model: Tag,
+        through: ProductTag
+      }
+    ]
+  })    
     .then((dbProductData) => res.json(dbProductData))
     .catch((err) => {
       console.log(err);
@@ -24,27 +32,11 @@ router.get("/:id", (req, res) => {
     where: {
       id: req.params.id,
     },
-    attributes: [
-      "id",
-      "category_name"[
-        (sequelize.literal(
-          "(SELECT COUNT(*) FROM category WHERE id = product_id)"
-        ),
-        "product_count")
-      ],
-    ],
     include: [
+      Category,
       {
-        model: Category,
-        attributes: ["id", "category_name"],
-        include: {
-          model: Tag,
-          attributes: ["id"],
-        },
-      },
-      {
-        model: ProductTag,
-        attributes: ["id"],
+        model: Tag,
+        through: ProductTag
       },
     ],
   })
@@ -61,14 +53,14 @@ router.get("/:id", (req, res) => {
     });
 });
 
-// create new product data (code provided from original sourcecode)
+// create new product data (use to test in Insomnia lines 58-64)
 router.post("/", (req, res) => {
   /* req.body should look like this...
     {
-      product_name: "Basketball",
-      price: 200.00,
-      stock: 3,
-      tagIds: [1, 2, 3, 4]
+      "product_name": "Basketball",
+      "price": 200.00,
+      "stock": 3,
+      "tagIds": [1, 2, 3, 4]
     }
   */
   Product.create(req.body)
