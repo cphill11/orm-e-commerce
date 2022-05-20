@@ -29,6 +29,8 @@ Provide options for business owners to organize information pertinent to personn
 ## Website
 Github: https://cphill11.github.io/orm-e-commerce/
 
+https://github.com/cphill11/orm-e-commerce.git
+
 Screencastify link: https://drive.google.com/file/d/1KsR1-ujLSQgkFjxi6I7vUrxBVbkkcrdX/view
 
 ## Image
